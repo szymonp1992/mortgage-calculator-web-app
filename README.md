@@ -1,29 +1,25 @@
-# mortgage-calculator-web-app
+# Mortgage calculator web app
 
-This template should help get you started developing with Vue 3 in Vite.
+## Table of contents
 
-## Recommended IDE Setup
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Live preview](#live-preview)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## General info
 
-## Customize configuration
+This app was created as a training project with guidelines from codementor.io. Its aim is to help calculating mortgage payment according to provided data: price, down payment, repayment time an interest rate.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Technologies
 
-## Project Setup
+Project is created with:
 
-```sh
-npm install
-```
+- Vue 3.2.41
 
-### Compile and Hot-Reload for Development
+Project uses external libraries:
 
-```sh
-npm run dev
-```
+- xxx
 
-### Compile and Minify for Production
+## Live preview
 
-```sh
-npm run build
-```
+Live preview is available at 
