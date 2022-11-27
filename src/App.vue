@@ -83,11 +83,30 @@ export default {
     const perMonth = ref(0);
 
     onMounted(() => {
-      loanAmount.value = purchasePrice.value - downPayment.value;
+      // loanAmount.value = purchasePrice.value - downPayment.value;
+      calculateRate();
     });
 
-    function calculateValue(p, i, n) {
-      return ((p * (((i * (1 + i)) ^ n) / ((1 + i) ^ (n - 1)))) / n)
+    function calculateRate() {
+      loanAmount.value = purchasePrice.value - downPayment.value;
+      const totalLoanAmount = loanAmount.value;
+      console.log("total loan amount: ", totalLoanAmount);
+      const repaymentMonths = repaymentTime.value * 12;
+      console.log("repayment months: ", repaymentMonths);
+      const monthlyInterestRate = interestRate.value / 12;
+      console.log("monthly interest rate: ", monthlyInterestRate);
+      let monthlyPayment;
+      if (!monthlyInterestRate) {
+        monthlyPayment = totalLoanAmount / repaymentMonths;
+        perMonth.value = monthlyPayment.toFixed(2);
+        return;
+      }
+      monthlyPayment =
+        (totalLoanAmount *
+          (monthlyInterestRate *
+            Math.pow(1 + monthlyInterestRate, repaymentMonths))) /
+        (Math.pow(1 + monthlyInterestRate, repaymentMonths) - 1);
+      perMonth.value = monthlyPayment.toFixed(2);
     }
 
     function changeValue(e) {
@@ -103,12 +122,13 @@ export default {
       if (e.target.id === "interest-rate") {
         interestRate.value = e.target.value;
       }
-      loanAmount.value = purchasePrice.value - downPayment.value;
-
-      const p = loanAmount.value;
-      const i = interestRate.value / 12;
-      const n = repaymentTime.value * 12;
-      perMonth.value = calculateValue(p, i, n)
+      // loanAmount.value = purchasePrice.value - downPayment.value;
+      // const p = loanAmount.value;
+      // const i = interestRate.value / 12;
+      // const n = repaymentTime.value * 12;
+      // perMonth.value = (p * (((i * (1 + i)) ^ n) / ((1 + i) ^ (n - 1)))) / n;
+      // perMonth.value.toFixed();
+      calculateRate();
     }
 
     return {
