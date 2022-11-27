@@ -66,6 +66,9 @@
         <p>Estimated pr. month:</p>
         <h2>${{ perMonth }}</h2>
       </div>
+      <div>
+        <h2>You will repay a total of: ${{ totalAmountToBeRepaid }}</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -81,6 +84,7 @@ export default {
     const interestRate = ref(0.03);
     const loanAmount = ref(0);
     const perMonth = ref(0);
+    const totalAmountToBeRepaid = ref(0);
 
     onMounted(() => {
       // loanAmount.value = purchasePrice.value - downPayment.value;
@@ -98,15 +102,18 @@ export default {
       let monthlyPayment;
       if (!monthlyInterestRate) {
         monthlyPayment = totalLoanAmount / repaymentMonths;
-        perMonth.value = monthlyPayment.toFixed(2);
-        return;
+      } else {
+        monthlyPayment =
+          (totalLoanAmount *
+            (monthlyInterestRate *
+              Math.pow(1 + monthlyInterestRate, repaymentMonths))) /
+          (Math.pow(1 + monthlyInterestRate, repaymentMonths) - 1);
       }
-      monthlyPayment =
-        (totalLoanAmount *
-          (monthlyInterestRate *
-            Math.pow(1 + monthlyInterestRate, repaymentMonths))) /
-        (Math.pow(1 + monthlyInterestRate, repaymentMonths) - 1);
       perMonth.value = monthlyPayment.toFixed(2);
+
+      totalAmountToBeRepaid.value = (perMonth.value * repaymentMonths).toFixed(
+        2
+      );
     }
 
     function changeValue(e) {
@@ -122,12 +129,6 @@ export default {
       if (e.target.id === "interest-rate") {
         interestRate.value = e.target.value;
       }
-      // loanAmount.value = purchasePrice.value - downPayment.value;
-      // const p = loanAmount.value;
-      // const i = interestRate.value / 12;
-      // const n = repaymentTime.value * 12;
-      // perMonth.value = (p * (((i * (1 + i)) ^ n) / ((1 + i) ^ (n - 1)))) / n;
-      // perMonth.value.toFixed();
       calculateRate();
     }
 
@@ -138,6 +139,7 @@ export default {
       interestRate,
       loanAmount,
       perMonth,
+      totalAmountToBeRepaid,
       changeValue,
     };
   },
