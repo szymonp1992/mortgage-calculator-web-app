@@ -158,7 +158,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 60%;
+  height: 80%;
   width: 80%;
   border: 10px solid white;
   border-radius: 15px;
@@ -167,10 +167,10 @@ export default {
 
 @media (max-width: 700px) {
   * {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
   .app-container {
-    height: 40%;
+    height: 55%;
   }
 }
 
