@@ -16,10 +16,6 @@ Project is created with:
 
 - Vue 3.2.41
 
-Project uses external libraries:
-
-- xxx
-
 ## Live preview
 
-Live preview is available at 
+Live preview is available at https://szymonp1992.github.io/mortgage-calculator-web-app/
